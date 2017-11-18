@@ -5,6 +5,7 @@ import javax.ejb.MessageDriven;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
+import javax.jms.TextMessage;
 
 import org.jboss.logging.Logger;
 
@@ -21,8 +22,8 @@ public class MyMessageConsumer implements MessageListener {
 	
     public void onMessage(Message message) {
         try {
-            String cId = message.getJMSCorrelationID();
-            log.info("getJMSCorrelationID - " + cId);
+            TextMessage txt = (TextMessage) message;
+            log.info("getJMSCorrelationID - " + txt.getText());
         } catch (JMSException e) {
             log.error("error", e);
         }
